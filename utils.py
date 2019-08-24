@@ -77,10 +77,11 @@ def find_all_headers_folders(folder_path):
 # Given the path of source file and the list of all source folders (in which, all the headers used in the
 # source file can be found), we compile the source code to object file and save that object
 # file by the name of "object_file"
-def compile_to_object_file(source_file_path, headers_folder_list):
+def compile_to_object_file(source_file_path, headers_folder_list, debug_mode = False):
     # Generate command to compile functions
     cmd = "g++ -c -g -I%s %s -o object_file 2>/dev/null" % (" -I".join(headers_folder_list), source_file_path)
-    print(cmd)
+    if debug_mode:
+        print(cmd)
     # Execute
     return os.system(cmd)
 
