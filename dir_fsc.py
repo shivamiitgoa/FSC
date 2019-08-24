@@ -1,4 +1,4 @@
-import os, sys, utils, argparse
+import os, sys, utils, argparse, json
 
 
 if __name__ == "__main__":
@@ -11,6 +11,10 @@ if __name__ == "__main__":
     # Get all folders (with their parent folders) which contains their header files
     headers_folder_list = utils.find_all_headers_folders(codebase_folder_path)
 
+    # Log file
+    log_dict = dict()
+    log_dict['success'] = list()
+    log_dict['fail'] = list()
     # Walk in the codebase to find source files
     compile_sucess = 0
     total_source_files_num = 0
@@ -21,6 +25,9 @@ if __name__ == "__main__":
                 compile_exit_value = utils.compile_to_object_file(file_path, headers_folder_list)
                 if compile_exit_value == 0:
                     compile_sucess += 1
+                    log_dict['success'].append(file_path)
+                else:
+                    log_dict['fail'].append(file_path)
                 total_source_files_num += 1
 
     # Print the results
