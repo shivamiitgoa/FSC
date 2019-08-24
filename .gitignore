@@ -4,3 +4,4 @@ decompiled_functions.json
 features.json
 object_file
 *.pyc
+*.swp

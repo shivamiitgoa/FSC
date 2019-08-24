@@ -79,10 +79,10 @@ def find_all_headers_folders(folder_path):
 # file by the name of "object_file"
 def compile_to_object_file(source_file_path, headers_folder_list):
     # Generate command to compile functions
-    cmd = "g++ -c -g -I%s %s -o object_file" % (" -I".join(headers_folder_list), source_file_path)
+    cmd = "g++ -c -g -I%s %s -o object_file 2>/dev/null" % (" -I".join(headers_folder_list), source_file_path)
     print(cmd)
     # Execute
-    os.system(cmd)
+    return os.system(cmd)
 
 
 # Retrieve the list of all non-static functions which is present in the source file along with its definition

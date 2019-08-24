@@ -12,16 +12,17 @@ if __name__ == "__main__":
     headers_folder_list = utils.find_all_headers_folders(codebase_folder_path)
 
     # Walk in the codebase to find source files
+    compile_sucess = 0
+    total_source_files_num = 0
     for root, _, files in os.walk(codebase_folder_path):
         for _file in files:
             if _file.endswith('.c') or _file.endswith('.cpp'):
-        compile_exit_value = utils.compile_to_object_file(cpp
+                file_path = os.path.join(root, _file)
+                compile_exit_value = utils.compile_to_object_file(file_path, headers_folder_list)
+                if compile_exit_value == 0:
+                    compile_sucess += 1
+                total_source_files_num += 1
 
-    # Compile to get object file
-    utils.compile_to_object_file(cpp_file_path, headers_folder_list)
-
-    # Retrieve function list from source code
-    func_list_from_src = utils.get_func_list(cpp_file_path)
-
-    # Save decompiled function
-    utils.save_decompiled_functions("object_file", func_list_from_src)
+    # Print the results
+    print("Number of files sucessfully compiled is %d." % compile_sucess)
+    print("Total number of source files is %d." % total_source_files_num)
