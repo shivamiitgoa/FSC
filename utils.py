@@ -80,6 +80,7 @@ def find_all_headers_folders(folder_path):
 def compile_to_object_file(source_file_path, headers_folder_list):
     # Generate command to compile functions
     cmd = "g++ -c -g -I%s %s -o object_file" % (" -I".join(headers_folder_list), source_file_path)
+    print(cmd)
     # Execute
     os.system(cmd)
 
