@@ -30,6 +30,9 @@ if __name__ == "__main__":
                     log_dict['fail'].append(file_path)
                 total_source_files_num += 1
 
+    # Save log file
+    json.dump(log_dict, open('log_file.json', 'w'), indent=4)
+
     # Print the results
     print("Number of files sucessfully compiled is %d." % compile_sucess)
     print("Total number of source files is %d." % total_source_files_num)
